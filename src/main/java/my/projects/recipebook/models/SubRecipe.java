@@ -3,6 +3,7 @@ package my.projects.recipebook.models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.util.Collection;
 import java.util.List;
@@ -31,6 +32,7 @@ public class SubRecipe {
             inverseJoinColumns = @JoinColumn(name = "ingredient_quantity_id"))
     private Collection<IngredientQuantity> ingredients;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "main_recipe_id")
     private Recipe mainRecipe;

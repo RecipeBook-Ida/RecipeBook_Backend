@@ -1,7 +1,8 @@
 package my.projects.recipebook.mappers;
 
 import my.projects.recipebook.models.SubRecipe;
-import my.projects.recipebook.models.dto.recipe.SubRecipeDTO;
+import my.projects.recipebook.models.dto.subrecipe.SubRecipeDTO;
+import my.projects.recipebook.models.dto.subrecipe.SubRecipePostDTO;
 import org.mapstruct.Mapper;
 
 import java.util.Collection;
@@ -16,6 +17,15 @@ public interface SubRecipeMapper {
      */
     //@Mapping(target = "movies",source = "movies")
     SubRecipeDTO subRecipeToSubRecipeDTO(SubRecipe subRecipe);
+
+    /**
+     * Mapper method to convert a SubRecipe object to a SubRecipeDTO object
+     * using MapStruct
+     * @param subRecipe The SubRecipe object to be mapped
+     * @return The resulting SubRecipeDTO object mapped to
+     */
+    //@Mapping(target = "movies",source = "movies")
+    SubRecipePostDTO subRecipeToSubRecipePostDTO(SubRecipe subRecipe);
 
     /**
      * Mapper method to convert a collection of SubRecipe objects to a collection
@@ -33,4 +43,5 @@ public interface SubRecipeMapper {
      */
     //@Mapping(target = "movies",source = "movies")
     SubRecipe subRecipeDTOToSubRecipe(SubRecipeDTO subRecipeDTO);
+    SubRecipe subRecipePostDTOToSubRecipe(SubRecipePostDTO subRecipePostDTO);
 }

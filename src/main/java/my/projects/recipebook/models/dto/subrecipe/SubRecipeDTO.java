@@ -1,9 +1,10 @@
-package my.projects.recipebook.models.dto.recipe;
+package my.projects.recipebook.models.dto.subrecipe;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import my.projects.recipebook.models.IngredientQuantity;
+import my.projects.recipebook.models.dto.ingredient.IngredientQuantityDTO;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,5 +20,5 @@ public class SubRecipeDTO {
     private int id;
     private String title;
     private String instructions;
-    private Collection<IngredientQuantity> ingredients;
+    private Collection<IngredientQuantityDTO> ingredients;
 }

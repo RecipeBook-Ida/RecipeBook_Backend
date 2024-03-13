@@ -23,4 +23,8 @@ public class IngredientQuantity {
     @ManyToOne
     @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "groceries")
+    private Collection<GroceryList> groceryList;
 }
