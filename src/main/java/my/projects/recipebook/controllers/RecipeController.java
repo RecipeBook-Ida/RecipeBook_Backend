@@ -8,8 +8,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import my.projects.recipebook.exceptions.RecipeNotFoundException;
 import my.projects.recipebook.mappers.RecipeMapper;
 import my.projects.recipebook.models.Recipe;
+import my.projects.recipebook.models.SubRecipe;
 import my.projects.recipebook.models.dto.recipe.*;
+import my.projects.recipebook.repositories.SubRecipeRepository;
 import my.projects.recipebook.services.recipe.RecipeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +20,18 @@ import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "recipes")
 public class RecipeController {
     private final RecipeService recipeService;
     private final RecipeMapper recipeMapper;
+
+    @Autowired
+    private SubRecipeRepository subRecipeRepository;
 
     public RecipeController(RecipeService recipeService, RecipeMapper recipeMapper) {
         this.recipeService = recipeService;
@@ -67,13 +75,31 @@ public class RecipeController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Cretated",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = RecipeDTO.class))}),
+                            schema = @Schema(implementation = RecipePostDTO.class))}),
     })
-    public ResponseEntity<RecipeDTO> add(@RequestBody RecipeDTO recipeDTO){
-        Recipe recipe = recipeMapper.recipeDTOToRecipe(recipeDTO);
+    public ResponseEntity<RecipeDTO> add(@RequestBody RecipePostDTO recipePostDTO){
+        Recipe recipe = new Recipe();
+        recipe.setTitle(recipePostDTO.getTitle());
+        recipe.setDescription(recipePostDTO.getDescription());
+        recipe.setCooktime(recipePostDTO.getCooktime());
+        recipe.setImage(recipePostDTO.getImage());
+        recipe.setCuisine(recipePostDTO.getCuisine());
+        recipe.setType(recipePostDTO.getType());
+        recipe.setPortion(recipePostDTO.getPortion());
+
+        List<SubRecipe> subRecipes = new ArrayList<>();
+        for (Integer subRecipeId : recipePostDTO.getSubRecipeIds()){
+            SubRecipe subRecipe = subRecipeRepository.
+                    findById(subRecipeId).
+                    orElseThrow(()-> new IllegalArgumentException("Invalid subRecipe"));
+            subRecipes.add(subRecipe);
+        }
+
+        recipe.setSubRecipes(subRecipes);
+
         Recipe newRecipe = recipeService.add(recipe);
         RecipeDTO newRecipeDTO = recipeMapper.recipeToRecipeDTO(newRecipe);
-        URI uri = URI.create(String.format("api/v1/recipe/%s", recipeDTO.getId()));
+        URI uri = URI.create(String.format("api/v1/recipe/%s", newRecipeDTO.getId()));
         return ResponseEntity.created(uri).body(newRecipeDTO);
 
     }
