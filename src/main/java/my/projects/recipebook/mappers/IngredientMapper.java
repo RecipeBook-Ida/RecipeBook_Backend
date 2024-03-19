@@ -2,6 +2,7 @@ package my.projects.recipebook.mappers;
 
 import my.projects.recipebook.models.Ingredient;
 import my.projects.recipebook.models.dto.ingredient.IngredientDTO;
+import my.projects.recipebook.models.dto.ingredient.IngredientPostDTO;
 import org.mapstruct.Mapper;
 
 import java.util.Collection;
@@ -34,4 +35,12 @@ public interface IngredientMapper {
      */
     //@Mapping(target = "movies",source = "movies")
     Ingredient ingredientDTOToIngredient(IngredientDTO ingredientDTO);
+
+    /**
+     * Mapper method to convert an IngredientPostDTO object to an Ingredient object
+     * using MapStruct
+     * @param ingredientPostDTO The IngredientPostDTO object to be mapped
+     * @return The resulting Ingredient mapped to
+     */
+    Ingredient ingredientPostDTOToIngredient(IngredientPostDTO ingredientPostDTO);
 }

@@ -9,7 +9,7 @@ import my.projects.recipebook.exceptions.RecipeNotFoundException;
 import my.projects.recipebook.mappers.IngredientMapper;
 import my.projects.recipebook.models.Ingredient;
 import my.projects.recipebook.models.dto.ingredient.IngredientDTO;
-import my.projects.recipebook.models.dto.recipe.RecipeDTO;
+import my.projects.recipebook.models.dto.ingredient.IngredientPostDTO;
 import my.projects.recipebook.services.ingredient.IngredientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,7 +45,7 @@ public class IngredientController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found the ingredient",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(oneOf = { RecipeDTO.class })) }),
+                            schema = @Schema(oneOf = { IngredientDTO.class })) }),
             @ApiResponse(responseCode = "400", description = "Invalid Id supplied"),
             @ApiResponse(responseCode = "404", description = "Ingredient not found"),
             @ApiResponse(responseCode = "500", description = "Internal server error",
@@ -67,13 +67,13 @@ public class IngredientController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Cretated",
             content = {@Content(mediaType = "application/json",
-                schema = @Schema(implementation = IngredientDTO.class))}),
+                schema = @Schema(implementation = IngredientPostDTO.class))}),
     })
-    public ResponseEntity<IngredientDTO> add(@RequestBody IngredientDTO ingredientDTO){
-        Ingredient ingredient = ingredientMapper.ingredientDTOToIngredient(ingredientDTO);
+    public ResponseEntity<IngredientDTO> add(@RequestBody IngredientPostDTO ingredientPostDTO){
+        Ingredient ingredient = ingredientMapper.ingredientPostDTOToIngredient(ingredientPostDTO);
         Ingredient newIngredient = ingredientService.add(ingredient);
         IngredientDTO newIngredientDTO = ingredientMapper.ingredientToIngredientDTO(newIngredient);
-        URI uri = URI.create(String.format("api/v1/ingredient/%s", ingredientDTO.getId()));
+        URI uri = URI.create(String.format("api/v1/ingredient/%s", newIngredientDTO.getId()));
         return ResponseEntity.created(uri).body(newIngredientDTO);
 
     }
