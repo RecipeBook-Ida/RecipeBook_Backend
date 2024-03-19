@@ -48,7 +48,7 @@ public class RecipeController {
 
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Get a recipe by id", description = "Recipe must exist", tags = {"Recipes", "Get"})
+    @Operation(summary = "Get a recipe by id", description = "Recipe must exist", tags = {"Recipes"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found the recipe",
                     content = { @Content(mediaType = "application/json",
