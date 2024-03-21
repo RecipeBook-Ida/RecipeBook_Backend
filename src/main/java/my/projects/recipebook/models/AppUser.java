@@ -3,8 +3,10 @@ package my.projects.recipebook.models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import my.projects.recipebook.models.dto.ingredient.IngredientQuantityDTO;
 import net.minidev.json.annotate.JsonIgnore;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -30,4 +32,10 @@ public class AppUser {
     @JsonIgnore
     @OneToMany(mappedBy = "appUser")
     private Set<Recipe> recipes;
+
+    @ManyToMany
+    @JoinTable(name = "groceryList",
+            joinColumns = @JoinColumn(name = "app_user_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_quantity_id"))
+    private Collection<IngredientQuantity> groceryList;
 }

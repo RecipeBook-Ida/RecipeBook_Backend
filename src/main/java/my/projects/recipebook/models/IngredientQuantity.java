@@ -25,6 +25,6 @@ public class IngredientQuantity {
     private Ingredient ingredient;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "groceries")
-    private Collection<GroceryList> groceryList;
+    @ManyToMany(mappedBy = "groceryList")
+    private Collection<AppUser> groceryList;
 }

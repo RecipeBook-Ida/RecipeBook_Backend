@@ -2,6 +2,11 @@ package my.projects.recipebook.models.dto.appuser;
 
 import lombok.Getter;
 import lombok.Setter;
+import my.projects.recipebook.models.dto.ingredient.IngredientQuantityDTO;
+import my.projects.recipebook.models.dto.recipe.RecipeListDTO;
+
+import java.util.Collection;
+import java.util.Set;
 
 /**
  * Domain class (entity) to carry all information from User class.
@@ -15,4 +20,6 @@ public class AppUserDTO {
     private String username;
     private String firstname;
     private String lastname;
+    private Set<IngredientQuantityDTO> groceryList;
+    private Set<RecipeListDTO> recipes;
 }
