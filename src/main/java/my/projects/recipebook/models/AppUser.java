@@ -36,6 +36,6 @@ public class AppUser {
     @ManyToMany
     @JoinTable(name = "groceryList",
             joinColumns = @JoinColumn(name = "app_user_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_quantity_id"))
-    private Collection<IngredientQuantity> groceryList;
+            inverseJoinColumns = @JoinColumn(name = "grocery_id"))
+    private Collection<Grocery> groceryList;
 }

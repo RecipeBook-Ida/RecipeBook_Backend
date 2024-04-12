@@ -2,6 +2,7 @@ package my.projects.recipebook.models.dto.appuser;
 
 import lombok.Getter;
 import lombok.Setter;
+import my.projects.recipebook.models.dto.grocery.GroceryDTO;
 import my.projects.recipebook.models.dto.ingredient.IngredientQuantityDTO;
 import my.projects.recipebook.models.dto.recipe.RecipeListDTO;
 
@@ -20,6 +21,6 @@ public class AppUserDTO {
     private String username;
     private String firstname;
     private String lastname;
-    private Set<IngredientQuantityDTO> groceryList;
+    private Set<GroceryDTO> groceryList;
     private Set<RecipeListDTO> recipes;
 }
