@@ -9,16 +9,12 @@ import my.projects.recipebook.exceptions.AppUserNotFoundException;
 import my.projects.recipebook.exceptions.RecipeNotFoundException;
 import my.projects.recipebook.mappers.AppUserMapper;
 import my.projects.recipebook.models.AppUser;
-import my.projects.recipebook.models.Grocery;
-import my.projects.recipebook.models.Ingredient;
 import my.projects.recipebook.models.IngredientQuantity;
 import my.projects.recipebook.models.dto.appuser.AppUserDTO;
 import my.projects.recipebook.models.dto.appuser.AppUserPostDTO;
 import my.projects.recipebook.models.dto.appuser.GroceryListPutDTO;
 import my.projects.recipebook.repositories.AppUserRepository;
-import my.projects.recipebook.repositories.GroceryRepository;
 import my.projects.recipebook.repositories.IngredientQuantityRepository;
-import my.projects.recipebook.repositories.SubRecipeRepository;
 import my.projects.recipebook.services.appuser.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,9 +24,7 @@ import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping(path = "appuser")
@@ -38,8 +32,6 @@ public class AppUserController {
     private final AppUserService appUserService;
     private final AppUserMapper appUserMapper;
 
-    @Autowired
-    private GroceryRepository groceryRepository;
     @Autowired
     private IngredientQuantityRepository ingredientQuantityRepository;
     @Autowired
@@ -145,40 +137,45 @@ public class AppUserController {
     public ResponseEntity<AppUserDTO> groceryListUpdate(@PathVariable Integer id, @RequestBody GroceryListPutDTO groceryListPutDTO){
         AppUser existingAppUser = appUserRepository.findById(id)
                 .orElseThrow(() -> new AppUserNotFoundException(id));
-       Collection<Grocery> groceries = existingAppUser.getGroceryList();
+        List<IngredientQuantity> groceries = existingAppUser.getGroceryList();
 
-        for (Integer groceryId : groceryListPutDTO.getGroceryIds()){
-            Grocery grocery = groceryRepository
+
+        for (Integer groceryId : groceryListPutDTO.getIngredientQuantityIds()){
+
+            IngredientQuantity newGrocery = ingredientQuantityRepository
                     .findById(groceryId)
                     .orElseThrow(()-> new IllegalArgumentException("Invalid grocery"));
 
-            if(groceries.contains(grocery)){
-                //groceries.remove(ingredientQuantity);
+            // Check if there's already an ingredient quantity with the same ingredient and unit
+            Optional<IngredientQuantity> existingQuantityOptional = groceries.stream()
+                    .filter(q -> q.getIngredient().equals(newGrocery.getIngredient()) && q.getUnit().equals(newGrocery.getUnit()))
+                    .findFirst();
 
-                // Check if IngredientQuantity exists
+            if (existingQuantityOptional.isPresent()) {
+                IngredientQuantity existingQuantity = existingQuantityOptional.get();
+                groceries.remove(existingQuantity);
+
                 IngredientQuantity doubleIngredientQuantity = ingredientQuantityRepository
-                        .findByQuantityAndUnitAndIngredient(ingredientQuantity.getQuantity()+ingredientQuantity.getQuantity(),
-                                ingredientQuantity.getUnit(), ingredientQuantity.getIngredient()).orElse(null);
+                        .findByQuantityAndUnitAndIngredient(existingQuantity.getQuantity()+newGrocery.getQuantity(),
+                                existingQuantity.getUnit(), existingQuantity.getIngredient()).orElse(null);
+
 
                 // If IngredientQuantity doesn't exist, create a new one
-                if(doubleIngredientQuantity == null){
+                if (doubleIngredientQuantity == null) {
                     doubleIngredientQuantity = new IngredientQuantity();
-                    doubleIngredientQuantity.setIngredient(ingredientQuantity.getIngredient());
-                    doubleIngredientQuantity.setUnit(ingredientQuantity.getUnit());
-                    doubleIngredientQuantity.setQuantity(ingredientQuantity.getQuantity()+ingredientQuantity.getQuantity());
-                    doubleIngredientQuantity = ingredientQuantityRepository.save(ingredientQuantity);
+                    doubleIngredientQuantity.setIngredient(newGrocery.getIngredient());
+                    doubleIngredientQuantity.setUnit(newGrocery.getUnit());
+                    doubleIngredientQuantity.setQuantity(newGrocery.getQuantity()+existingQuantity.getQuantity());
+                    ingredientQuantityRepository.save(doubleIngredientQuantity);
                 }
                 groceries.add(doubleIngredientQuantity);
-            }else {groceries.add(ingredientQuantity);}
 
+            }else groceries.add(newGrocery);
 
         }
-
-
         existingAppUser.setGroceryList(groceries);
         appUserRepository.save(existingAppUser);
         return ResponseEntity.ok(appUserMapper.appUserToAppUserDTO(existingAppUser));
-
     }
 
 }

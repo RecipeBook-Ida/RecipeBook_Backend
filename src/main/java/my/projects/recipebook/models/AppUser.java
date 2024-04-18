@@ -6,8 +6,7 @@ import lombok.Setter;
 import my.projects.recipebook.models.dto.ingredient.IngredientQuantityDTO;
 import net.minidev.json.annotate.JsonIgnore;
 
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Domain class (entity) to represent a User.
@@ -36,6 +35,23 @@ public class AppUser {
     @ManyToMany
     @JoinTable(name = "groceryList",
             joinColumns = @JoinColumn(name = "app_user_id"),
-            inverseJoinColumns = @JoinColumn(name = "grocery_id"))
-    private Collection<Grocery> groceryList;
+            inverseJoinColumns = @JoinColumn(name = "ingredient_quantity_id"))
+    private List<IngredientQuantity> groceryList;
+
+    public Map<Ingredient, List<IngredientQuantity>> sortGroceryList(List<IngredientQuantity> groceryList){
+        List<IngredientQuantity> sortedGroceryList = new ArrayList<>(groceryList);
+        Collections.sort(sortedGroceryList);
+
+        Map<Ingredient, List<IngredientQuantity>> groupedGroceries = new HashMap<>();
+        for (IngredientQuantity ingredientQuantity : sortedGroceryList) {
+            Ingredient ingredient = ingredientQuantity.getIngredient();
+            if (!groupedGroceries.containsKey(ingredient)) {
+                groupedGroceries.put(ingredient, new ArrayList<>());
+            }
+            groupedGroceries.get(ingredient).add(ingredientQuantity);
+        }
+
+        return groupedGroceries;
+
+    }
 }

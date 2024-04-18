@@ -3,6 +3,7 @@ package my.projects.recipebook.models.dto.appuser;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 public class GroceryListPutDTO {
-    private List<Integer> groceryIds;
+    private List<Integer> ingredientQuantityIds;
 }
 
 

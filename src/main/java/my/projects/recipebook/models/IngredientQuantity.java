@@ -1,6 +1,5 @@
 package my.projects.recipebook.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +10,7 @@ import java.util.Collection;
 @Entity
 @Getter
 @Setter
-public class IngredientQuantity {
+public class IngredientQuantity implements Comparable<IngredientQuantity> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +24,12 @@ public class IngredientQuantity {
     private Ingredient ingredient;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "quantities")
-    private Collection<Grocery> groceries;
+    @ManyToMany(mappedBy = "groceryList")
+    private Collection<AppUser> groceryList;
 
+
+    @Override
+    public int compareTo(IngredientQuantity other) {
+        return this.getIngredient().getName().compareTo(other.getIngredient().getName());
+    }
 }
