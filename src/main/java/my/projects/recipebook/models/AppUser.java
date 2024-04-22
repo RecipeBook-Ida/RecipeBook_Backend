@@ -38,6 +38,12 @@ public class AppUser {
             inverseJoinColumns = @JoinColumn(name = "ingredient_quantity_id"))
     private List<IngredientQuantity> groceryList;
 
+    @ManyToMany
+    @JoinTable(name = "favorites",
+            joinColumns = @JoinColumn(name = "app_user_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_id"))
+    private List<Recipe> favorites;
+
     public Map<Ingredient, List<IngredientQuantity>> sortGroceryList(List<IngredientQuantity> groceryList){
         List<IngredientQuantity> sortedGroceryList = new ArrayList<>(groceryList);
         Collections.sort(sortedGroceryList);

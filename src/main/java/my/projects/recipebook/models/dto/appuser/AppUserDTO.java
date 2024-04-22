@@ -3,8 +3,10 @@ package my.projects.recipebook.models.dto.appuser;
 import lombok.Getter;
 import lombok.Setter;
 import my.projects.recipebook.models.dto.ingredient.IngredientQuantityDTO;
+import my.projects.recipebook.models.dto.recipe.RecipeDTO;
 import my.projects.recipebook.models.dto.recipe.RecipeListDTO;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,4 +23,5 @@ public class AppUserDTO {
     private String lastname;
     private Set<IngredientQuantityDTO> groceryList;
     private Set<RecipeListDTO> recipes;
+    private List<RecipeListDTO> favorites;
 }
