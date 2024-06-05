@@ -14,4 +14,5 @@ import lombok.Setter;
 public class AppUserListDTO {
     private int id;
     private String username;
+    private String image;
 }

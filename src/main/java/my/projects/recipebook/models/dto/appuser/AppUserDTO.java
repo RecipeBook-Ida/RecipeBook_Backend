@@ -18,6 +18,7 @@ import java.util.Set;
 @Setter
 public class AppUserDTO {
     private int id;
+    private String image;
     private String username;
     private String firstname;
     private String lastname;
