@@ -12,6 +12,7 @@ import lombok.Setter;
 @Setter
 public class AppUserPostDTO {
     private String username;
+    private String image;
     private String firstname;
     private String lastname;
 }

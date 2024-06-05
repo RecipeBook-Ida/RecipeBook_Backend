@@ -2,6 +2,10 @@ package my.projects.recipebook.models.dto.recipe;
 
 import lombok.Getter;
 import lombok.Setter;
+import my.projects.recipebook.models.dto.appuser.AppUserListDTO;
+import my.projects.recipebook.models.dto.subrecipe.SubRecipeDTO;
+
+import java.util.List;
 
 /**
  * Domain class (entity) to carry some information from Recipe class.
@@ -15,4 +19,9 @@ public class RecipeListDTO {
     private int id;
     private String title;
     private String description;
+    private Integer cooktime;
+    private String image;
+    private String cuisine;
+    private String type;
+    private Integer portion;
 }

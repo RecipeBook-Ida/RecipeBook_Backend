@@ -27,7 +27,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                //.cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/").permitAll()
@@ -37,5 +37,27 @@ public class SecurityConfig {
         return http.build();
     }
 
-
+    /**
+     * Configures the CORS (Cross-Origin Resource Sharing) configuration.
+     *
+     * @return the configured CorsConfigurationSource
+     */
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        //Local dev server and Public link to frontend
+        List<String> allowedOriginsList = Arrays.asList("http://localhost:5173",
+                "http://futurewebsitelinkToFrontend");
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(allowedOriginsList);
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("authorization", "withCredentials", "content-type",
+                "x-auth-token", "Access-Control-Allow-Credentials", "access-control-allow-origin",
+                "Access-Control-Allow-headers"));
+        configuration.setExposedHeaders(List.of("x-auth-token"));
+        configuration.setMaxAge(Duration.ofSeconds(6120));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 }

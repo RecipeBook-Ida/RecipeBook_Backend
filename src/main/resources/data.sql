@@ -1,4 +1,4 @@
-INSERT INTO app_user (username, firstname, lastname) VALUES ('idap', 'Ida', 'L');
+INSERT INTO app_user (username, firstname, lastname, image) VALUES ('idap', 'Ida', 'L', 'https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_auto/b4golm8sdghdq1vzivxz/klassisk-pasta-carbonara');
 INSERT INTO app_user (username, firstname, lastname) VALUES ('id', 'Ida', 'k');
 
 INSERT INTO recipe (title, description, cooktime, image, cuisine, type, portion, user_id)
@@ -9,21 +9,21 @@ INSERT INTO recipe (title, description, cooktime, image, cuisine, type, portion,
 VALUES ('Chicken Fajitas', 'Tender chicken strips with colorful bell peppers and onions, seasoned with fajita spices.',
         25, 'https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2020/02/Chicken-Fajitas-7.jpg', 'Mexican', 'Dinner', 4, 1);
 
-INSERT INTO recipe (title, description, cooktime, image, cuisine, type, portion, user_id)
+INSERT INTO recipe (title, description, cooktime,  cuisine, type, portion, user_id)
 VALUES ('Vegetable Curry', 'A flavorful vegetarian curry made with mixed vegetables and aromatic spices.',
-        30, 'https://example.com/vegetable-curry.jpg', 'Vegetarian', 'Dinner', 4, 1);
+        30,  'Vegetarian', 'Dinner', 4, 1);
 
 INSERT INTO recipe (title, description, cooktime, image, cuisine, type, portion, user_id)
 VALUES ('Grilled Salmon with Lemon Butter Sauce', 'Delicious grilled salmon fillets topped with a tangy lemon butter sauce.',
         15, 'https://example.com/grilled-salmon.jpg', 'Seafood', 'Dinner', 4, 1);
 
-INSERT INTO recipe (title, description, cooktime, image, cuisine, type, portion, user_id)
+INSERT INTO recipe (title, description, cooktime,  cuisine, type, portion, user_id)
 VALUES ('Caprese Salad', 'A simple and refreshing salad made with ripe tomatoes, fresh mozzarella, and fragrant basil.',
-        10, 'https://example.com/caprese-salad.jpg', 'Salad', 'Lunch', 2, 1);
+        10,  'Salad', 'Lunch', 2, 1);
 
-INSERT INTO recipe (title, description, cooktime, image, cuisine, type, portion, user_id)
+INSERT INTO recipe (title, description, cooktime, cuisine, type, portion, user_id)
 VALUES ('Chocolate Lava Cake', 'Indulgent chocolate cakes with a gooey, molten center that oozes out when cut.',
-        20, 'https://example.com/chocolate-lava-cake.jpg', 'Dessert', 'Dessert', 4, 1);
+        20,  'Dessert', 'Dessert', 4, 1);
 
 INSERT INTO sub_recipe (title, instructions, recipe_id)
 VALUES ('Spaghetti Carbonara Instructions', 'Cook spaghetti according to package instructions. \nIn a skillet, cook bacon until crispy. \nIn a bowl, whisk together eggs, parmesan cheese, and black pepper. \nDrain spaghetti and add to the skillet with the bacon. \nRemove skillet from heat and quickly stir in egg mixture, allowing the residual heat to cook the eggs and create a creamy sauce. \nServe immediately, garnished with additional parmesan cheese and black pepper.', 1);
