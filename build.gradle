@@ -18,7 +18,6 @@ azurewebapp {
 		webContainer = 'Tomcat 9.0'
 		javaVersion = 'Java 11'
 	}
-	packageFile = file('build/libs/your-artifact.jar')
 }
 
 group = 'my.projects'
