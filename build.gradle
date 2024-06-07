@@ -5,6 +5,7 @@ plugins {
 	id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.17"
 	id "io.freefair.lombok" version "8.4"
 	id "com.microsoft.azure.azurewebapp" version "1.6.0"
+	id 'war'
 }
 
 azurewebapp {
