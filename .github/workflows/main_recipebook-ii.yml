@@ -51,6 +51,9 @@ jobs:
 
       - name: List downloaded files
         run: ls -la
+        
+      - name: List files in current directory
+        run: ls -la
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
