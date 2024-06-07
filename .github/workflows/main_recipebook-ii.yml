@@ -1,3 +1,5 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
 name: Build and deploy WAR app to Azure Web App - RecipeBook-ii
 
 on:
@@ -27,14 +29,11 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
-      - name: List build/libs directory
-        run: ls -la build/libs
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: RecipeBook_Backend
-          path: 'build/libs/*.war'
+          name: java-app
+          path: '${{ github.workspace }}/target/*.war'
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,13 +46,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: RecipeBook_Backend
-
-      - name: List downloaded files
-        run: ls -la
-        
-      - name: List files in current directory
-        run: ls -la
+          name: java-app
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -61,5 +54,5 @@ jobs:
         with:
           app-name: 'RecipeBook-ii'
           slot-name: 'Production'
-          package: 'RecipeBook-0.0.1-SNAPSHOT.war'
+          package: '*.war'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5B51138C370C46FDA5A9256DBFEE2185 }}
