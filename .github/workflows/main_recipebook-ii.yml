@@ -61,5 +61,5 @@ jobs:
         with:
           app-name: 'RecipeBook-ii'
           slot-name: 'Production'
-          package: 'RecipeBook_Backend/build/libs/*.war'
+          package: 'RecipeBook-0.0.1-SNAPSHOT.war'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5B51138C370C46FDA5A9256DBFEE2185 }}
