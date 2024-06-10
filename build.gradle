@@ -55,7 +55,7 @@ dependencies {
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-	implementation 'org.keycloak:keycloak-admin-client:22.0.5'
+	//implementation 'org.keycloak:keycloak-admin-client:22.0.5'
 	implementation 'org.springframework.boot:spring-boot-starter-mail:3.2.0'
 	implementation 'org.passay:passay:1.6.4'
 	implementation 'com.sendgrid:sendgrid-java:4.10.1'
@@ -64,7 +64,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	//implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'io.springfox:springfox-swagger2:2.9.2'
+	//implementation 'io.springfox:springfox-swagger2:2.9.2'
 	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

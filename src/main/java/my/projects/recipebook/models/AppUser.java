@@ -3,7 +3,6 @@ package my.projects.recipebook.models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import my.projects.recipebook.models.dto.ingredient.IngredientQuantityDTO;
 import net.minidev.json.annotate.JsonIgnore;
 
 import java.util.*;
