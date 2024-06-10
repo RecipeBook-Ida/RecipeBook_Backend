@@ -39,35 +39,25 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:3.1.4'
-	implementation 'org.springframework.boot:spring-boot-starter-security:3.1.4'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.1.4'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
-    testImplementation 'junit:junit:4.13.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
-    compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'org.springframework.boot:spring-boot-starter-web' // Spring Boot Starter Web - for building web applications
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // Spring Boot Starter Data JPA - for JPA and Hibernate
+	compileOnly 'org.projectlombok:lombok'
+	//runtimeOnly 'com.h2database:h2' // H2 Database - in-memory database for development and testing
+	runtimeOnly 'org.postgresql:postgresql' // PostgreSQL Database
+	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
 	annotationProcessor 'org.projectlombok:lombok'
-	compileOnly 'org.mapstruct:mapstruct:1.5.5.Final'
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
-	//implementation 'org.keycloak:keycloak-admin-client:22.0.5'
-	implementation 'org.springframework.boot:spring-boot-starter-mail:3.2.0'
-	implementation 'org.passay:passay:1.6.4'
-	implementation 'com.sendgrid:sendgrid-java:4.10.1'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test' // Spring Boot Starter Test - for testing
+	//implementation 'org.springdoc:springdoc-openapi-ui:1.7.0' // SpringDoc OpenAPI - for generating Swagger documentation
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
 	implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
 
+	//Other
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-
-	//implementation 'org.springframework.boot:spring-boot-starter-web'
-	//implementation 'io.springfox:springfox-swagger2:2.9.2'
-	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {

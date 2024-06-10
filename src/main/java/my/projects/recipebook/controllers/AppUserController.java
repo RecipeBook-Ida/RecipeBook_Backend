@@ -96,7 +96,7 @@ public class AppUserController {
 
     }
 
-    /**
+    /*
     @PutMapping("/{id}")
     @Operation(summary = "Update user", tags = {"AppUser"})
     @ApiResponses(value = {
@@ -111,7 +111,7 @@ public class AppUserController {
         return ResponseEntity.ok(appUserMapper.appUserToAppUserDTO(updatedUser));
 
     }
-**/
+*/
     @PutMapping("/update/{id}")
     @Operation(summary = "Update user", tags = {"AppUser"})
     @ApiResponses(value = {
