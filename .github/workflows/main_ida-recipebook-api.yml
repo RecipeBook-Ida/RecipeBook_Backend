@@ -61,4 +61,4 @@ jobs:
         with:
           app-name: 'ida-recipebook-api'
           slot-name: 'Production'
-          package: '*.war'
+          package:  'RecipeBook-0.0.1-SNAPSHOT.war'
