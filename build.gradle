@@ -8,26 +8,6 @@ plugins {
 	id 'war'
 }
 
-azurewebapp {
-	subscription = 'f43c8c29-707f-406f-85e8-ce49355793fb'
-	resourceGroup = 'RecipeBook-group'
-	appName = 'RecipeBook-ii'
-	pricingTier = 'F1'
-	region = 'northeurope'
-	runtime {
-		os = 'Linux'
-		webContainer = 'Tomcat 9.0'
-		javaVersion = 'Java 11'
-	}
-}
-
-group = 'my.projects'
-version = '0.0.1-SNAPSHOT'
-
-java {
-	sourceCompatibility = '17'
-}
-
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
