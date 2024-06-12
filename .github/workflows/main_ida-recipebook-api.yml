@@ -27,6 +27,9 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
+      - name: List files after build
+        run: ls -la build/libs
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
@@ -47,6 +50,9 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: java-app
+
+      - name: List files after download
+        run: ls -la
       
       - name: Login to Azure
         uses: azure/login@v1
@@ -61,4 +67,4 @@ jobs:
         with:
           app-name: 'ida-recipebook-api'
           slot-name: 'Production'
-          package:  'RecipeBook-0.0.1-SNAPSHOT.war'
+          package: 'build/libs/*.war'
